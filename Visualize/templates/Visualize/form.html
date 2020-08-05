@@ -1,0 +1,77 @@
+<div style="line-height:0px;font-size:5em;padding-top:27%;  -webkit-text-stroke: 2px white;
+    -webkit-text-fill-color: green;">
+  Raid Visualization Tool
+</div>
+
+ <form action="add" method="POST" id="myForm">
+
+        {% csrf_token %}
+        <table width="100%">
+          <tr>
+            <td width="30%">
+                
+            </td>
+            <td>
+              <div>
+                <ul>
+                    <input type="hidden" value="0" id="raidLevel" name="level"/>
+                    <label style="margin-left:-20%;font-size:1.5em;">  Raid Level : &emsp;</label> 
+                    <button type="button" class="btn btn-success" onclick="raidLevelClick(this);" style="border:5px solid white;">0</button> 
+                     <button type="button" class= "btn btn-success" onclick="raidLevelClick(this);">1</button> 
+                     <button type="button" class= "btn btn-success" onclick="raidLevelClick(this);">4</button>  
+                     <button type="button" class= "btn btn-success" onclick="raidLevelClick(this);">5</button> 
+                     <button type="button" class= "btn btn-success" onclick="raidLevelClick(this);">10</button> 
+                  </ul>
+                  <br>
+              </div> 
+            </td>
+            <td width="20%"></td>
+          </tr>
+          <tr>
+            <td style="text-align:right;">
+              <label style="font-size:1.5em;line-height:10px;"> Number of Request : &nbsp; (<span id="reqValue"></span>) &nbsp;</label>
+            </td>
+            <td>
+              
+              <div class="slidecontainer" style="border:5px solid white;">
+                <input style="margin:0px;padding:0px;width:100%;" name="numreq" type="range" min="4" max="32" value="15" class="slider" id="myRange">
+              </div>  
+            </td>
+            <td>
+            </td>
+          </tr>
+          <tr>
+            <td>
+            </td>
+            <td>
+              <div style="float:left;margin-top:4%;margin-left:5%;">
+                <label style="font-size:1.5em;line-height:20px;">  Number of Disk : &nbsp;</label>
+                <input type='button' value='-' class='qtyminus' field='disk' />
+                <input type='text' name='disk' value='2' min="2" max="6" class='qty' id="numDisk" readonly/>
+                <input type='button' value='+' class='qtyplus' field='disk' />
+              </div> 
+              <div class="mid" style="float:left;margin-top:2.5%;margin-left:10%;">
+                <label style="font-size:1.5em;line-height:10px;">Operation : &emsp;</label>
+                <label class="rocker">
+                  <input type="checkbox" onChange="readWrite(this);" checked>
+                  <span class="switch-left">R</span>
+                  <span class="switch-right">W</span>
+                </label>
+                <input type="hidden" value="0" name="write" id="operation"/>
+              </div>
+            </td>
+            <td>
+              
+            </td>
+           
+          </tr>
+        </table>
+        	<a onclick="submitForm();" href="#">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+						Animate
+    				</a>
+ </form>
+				

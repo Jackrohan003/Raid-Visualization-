@@ -1,0 +1,75 @@
+{% load static %}
+
+<section id="processor">
+    <img src="{% static 'images/processor(1).png'%}" style="transform:rotateZ(10deg) rotateX(10deg)" alt="" width="150%">    
+</section>
+<section id="memory">
+    <img src="{% static 'images/ram1.png'%}" alt="" width="150%">
+    {% comment %} {%for n in disk%}
+        {%for key, value in n.items%}
+            {{ key }} ----> {{ value }}<br/>
+        {% endfor %}
+    {% endfor %} {% endcomment %}
+</section>
+<section id='disks'>
+<section id='innerBlock'>   
+{%for n in disk%}
+    <section id="{{n}}">
+        <div>
+            <b id="b{{n}}"></b> 
+        </div>
+        {% for key, value in n.items %}
+            {% comment %} <div class="block" id="data{{key}}" style="margin:2%;">
+                {{value}}
+            </div> {% endcomment %}
+            <div class="wrap" id="data{{key}}">
+                {% if value == 0 %}
+                <div class="cube">
+                    <div class="front">
+                    Parity
+                    </div>
+                    <div class="back">
+                    Parity
+                    </div>
+                    <div class="top">
+                    Parity
+                    </div>
+                    <div class="bottom">
+                    Parity
+                    </div>
+                    <div class="left">
+                    Parity
+                    </div>
+                    <div class="right">
+                    Parity
+                    </div>
+                </div>
+                {% else %}
+                <div class="cube">
+                    <div class="front">
+                    {{value}}
+                    </div>
+                    <div class="back">
+                    {{value}}
+                    </div>
+                    <div class="top">
+                    {{value}}
+                    </div>
+                    <div class="bottom">
+                    {{value}}
+                    </div>
+                    <div class="left">
+                    {{value}}
+                    </div>
+                    <div class="right">
+                    {{value}}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </section>
+{% endfor %}
+</section>
+</section>
+

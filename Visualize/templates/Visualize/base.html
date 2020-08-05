@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>RAID level examples // RAID-OJAA</title>
+
+  <!--build:css css/styles.min.css-->
+  {% load static %}
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/slick.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/slick-theme.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+  <!--endbuild-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!--[if lt IE 9]>
+	<script src="script/html5shiv.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="container-fluid page" style="margin:0px;padding:0px !important;">
+		
+		<div class="row" style="margin:0px">
+				<div class="item">
+
+
+					{% include 'Visualize/form.html'%} 
+
+					<form action="calculator" style="position:relative;top:1%;left:40%;">
+						<button type="submit" class="btn btn-danger">GO to Calculator &amp; Recovery</button>
+					</form>
+  				 	
+				</div>
+				
+		</div>
+		<div class="row text-center">
+			<div class="image-holder">
+			<div id="binary">0101001110011001</div>
+    				
+				{% include 'Visualize/content.html'%}
+			</div>
+		</div>
+	</div>
+
+<!--build:js js/main.min.js -->
+
+{%include 'Visualize/scripts.html'%}
+
+</body>
+</html>

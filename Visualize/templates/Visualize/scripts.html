@@ -1,0 +1,45 @@
+{% load static %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/slick.js' %}"></script>
+<script src="{% static 'js/marquee/jquery.marquee.js' %}"></script>
+<script src="{% static 'js/main.js'%}"></script>
+
+<script>
+	$('#binary').hide();
+</script>
+{% if data.submitted == True %}
+	{% if  data.level == 0%}
+		{% include 'Visualize/raid0.html' %}
+	{% endif %} 
+	
+	{% if  data.level == 1 or data.level == 10%}
+		{% include 'Visualize/raid1.html' %}
+	{% endif %} 
+
+	{% if  data.level == 4%}
+		{% include 'Visualize/raid4.html' %}
+	{% endif %} 
+
+	{% if  data.level == 5%}
+		{% include 'Visualize/raid5.html' %}
+	{% endif %} 
+	<script>
+
+		$('#raidLevel').val({{data.level}});
+    	$('#myRange').val({{data.numRequest}});
+    	$('#numDisk').val({{data.numDisks}});
+
+		$('.btn-success').each(function(btn){
+
+			if($('.btn-success')[btn].innerText == {{data.level}})
+			{
+				$('.btn-success')[btn].style.border='5px solid white';
+			}
+			else
+			{
+				$('.btn-success')[btn].style.border='none';
+			}
+		})
+	</script>
+{% endif %}

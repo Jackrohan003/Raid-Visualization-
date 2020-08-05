@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RAID-Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/brands.min.css">
+    <style>
+        body
+        {
+            background-color:rgba(18, 177, 143, 0.767)  !important;
+        }
+        
+        .btn-hdd {
+            width: 3.7rem;
+        }
+        /* for example only */
+        body {
+            padding-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="card-header text-center">
+            <h1 class="h5 mb-0">RAID Calculator With Recovery</h1>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item text-center">
+                <div class="font-weight-bold">Add hard disks</div>
+                <button class="add-drive btn btn-hdd btn-info m-1" id="16" role="button"><span class="small">16 TB</span> <i class="fa-hdd fas"></i></button>
+                <button class="add-drive btn btn-hdd btn-info m-1" id="14" role="button"><span class="small">14 TB</span> <i class="fa-hdd fas"></i></button>
+                <button class="add-drive btn btn-hdd btn-info m-1" id="12" role="button"><span class="small">12 TB</span> <i class="fa-hdd fas"></i></button>
+                <button class="add-drive btn btn-hdd btn-info m-1" id="10" role="button"><span class="small">10 TB</span> <i class="fa-hdd fas"></i></button>
+                <button class="add-drive btn btn-hdd btn-info m-1" id="8" role="button"><span class="small">8 TB</span> <i class="fa-hdd fas"></i></button>
+                <button class="add-drive btn btn-hdd btn-info m-1" id="6" role="button"><span class="small">6 TB</span> <i class="fa-hdd fas"></i></button>
+                <button class="add-drive btn btn-hdd btn-info m-1" id="4" role="button"><span class="small">4 TB</span> <i class="fa-hdd fas"></i></button>
+                <button class="add-drive btn btn-hdd btn-info m-1" id="3" role="button"><span class="small">3 TB</span> <i class="fa-hdd fas"></i></button>
+                <button class="add-drive btn btn-hdd btn-info m-1" id="2" role="button"><span class="small">2 TB</span> <i class="fa-hdd fas"></i></button>
+                <button class="add-drive btn btn-hdd btn-info m-1" id="1" role="button"><span class="small">1 TB</span> <i class="fa-hdd fas"></i></button>
+            </li>
+            <li class="list-group-item text-center bg-light">
+                <div class="font-weight-bold">Server</div>
+                <div id="server" style="min-height: 62px;"
+                     data-class="btn border border-dark btn-hdd this-drive rounded-0"
+                     data-prefix="<span class='small'>"
+                     data-suffix=" TB</span><i class='fas fa-hdd'></i>"
+                     data-maxdrives="32"
+                >
+                </div>
+                <div class="small text-muted d-none" id="remove_msg">
+                    To remove a hard disk, click on it.
+                </div>
+                <div class="small text-muted" id="add_msg">
+                    Please add at least 2 hard disks
+                </div>
+            </li>
+            <li class="list-group-item d-none" id="raid-box">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label class="sr-only" for="raid">RAID Level</label>
+                        <select class="custom-select mb-1" id="raid">
+                            <option value="0">RAID 0</option>
+                            <option value="1">RAID 1</option>
+                            <option value="5">RAID 5</option>
+                            <option value="6">RAID 6</option>
+                            <option value="10">RAID 10</option>
+                        </select>
+                    </div>
+                    <div class="col-sm">
+                        <div id="raid5error" class="alert alert-warning font-weight-bold text-center raid-error d-none">
+                            The minimum number of disks in a RAID 5 set is 3.
+                        </div>
+                        <div id="raid6error" class="alert alert-warning font-weight-bold text-center raid-error d-none">
+                            The minimum number of disks in a RAID 6 set is 4.
+                        </div>
+                        <div id="raid10error" class="alert alert-warning font-weight-bold text-center raid-error d-none">
+                            The minimum number of disks in a RAID 10 set is 4 and it must be an even number.
+                        </div>
+                        <div id="showCalc">
+                            <div class="alert alert-success">
+                                Available disk space:<br class="d-sm-none">
+                                <span id="storage" class="font-weight-bold"></span>
+                            </div>
+                            <div class="alert alert-info">
+                                Parity/Protection:<br class="d-sm-none">
+                                <span id="parity" class="font-weight-bold"></span>
+                            </div>
+                            <div class="alert alert-warning">
+                                Unused disk space:<br class="d-sm-none">
+                                <span id="unused" class="font-weight-bold"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="col-sm" style="text-align:center;">
+                        <img id="recoveryImage">
+
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="card-footer text-center">
+            SOURCE:-<br/>
+            <a href="https://github.com/NormanHuth/RAID-Calculator">Calculator:-https://github.com/NormanHuth/RAID-Calculator</a>
+            <br/>
+            <a href='https://github.com/AlekssGu/raid-visualization'>Images:-https://github.com/AlekssGu/raid-visualization</a>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+<script src={% static 'js/raid-calculator.min.js' %}></script>
+<script>
+    $(document).ready(function(){
+        if($('#raid').val() == 0)
+        {
+            $('#recoveryImage').attr('src','');
+            $('#recoveryImage').attr('alt','RAID 0 does not support recovery');
+        }
+        else if($('#raid').val() == 10)
+        {
+            $('#recoveryImage').attr('src','');
+            $('#recoveryImage').attr('alt','RAID 10 recovery gif not available');
+        }
+        else
+        { 
+            let img = 'images/RAID' + $('#raid').val() + '_RECOVER.gif';
+            $('#recoveryImage').attr('src',"../../static/"+img);
+        }
+
+        $('#raid').change(function(){
+            if($('#raid').val() == 0)
+            {
+                $('#recoveryImage').attr('src','');
+                $('#recoveryImage').attr('alt','RAID 0 does not support recovery');
+            }
+            else if($('#raid').val() == 10)
+            {
+                $('#recoveryImage').attr('src','');
+                $('#recoveryImage').attr('alt','RAID 10 recovery gif not available');
+            }
+            else
+            { 
+                let img = 'images/RAID' + $('#raid').val() + '_RECOVER.gif';
+                $('#recoveryImage').attr('src',"../../static/"+img);
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
